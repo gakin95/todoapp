@@ -1,4 +1,4 @@
-# Next.js example
+# Next.js 
 
 ## How to use
 
