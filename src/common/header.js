@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
   },
   img: {
     width: 150,
-    height: '10vh'
+    height: '10vh',
+    cursor:'pointer'
   },
   btn:{
       width:150
