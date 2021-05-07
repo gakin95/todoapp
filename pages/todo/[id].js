@@ -129,12 +129,13 @@ const EditTodo = ({onEditTodo,todos}) => {
           title:response.data.title,
           userId:response.data.userId,
         })
-        setData({
-          id: response.data.id,
-          body: response.data.body,
-          title:response.data.title,
-          userId:response.data.userId,
-        })
+        // setData({
+        //   id: response.data.id,
+        //   body: response.data.body,
+        //   title:response.data.title,
+        //   userId:response.data.userId,
+        // })
+        router.push(`/post/${response.data.id}`)
       }
     }
    }
