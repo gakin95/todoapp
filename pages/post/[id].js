@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper} from "@material-ui/core";
 import { useRouter } from 'next/router';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop';
 import { connect } from "react-redux";
 
 import Header from '../../src/common/header';
@@ -16,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
   },
   paper: {
     width: 559,
@@ -75,12 +81,15 @@ const ViewTodo = ({onDeleteTodo,todos}) => {
     body: '',
     userId: '',
   });
+  const [loading,setLoading] = useState(false);
 
   const GetATodo = async (id) => {
+    setLoading(true);
     const response = await getATodo(id);
     const items = [...todos];
     const curItem = items.find(item => item.id == id);
     if (response && response.data){
+      setLoading(false);
       setData({
         id: curItem ? curItem.id : response.data.id,
         body: curItem ? curItem.body :response.data.body,
@@ -125,6 +134,9 @@ const ViewTodo = ({onDeleteTodo,todos}) => {
     <div>
        <Header />
       <div className={classes.root}>
+      <Backdrop className={classes.backdrop} open={loading} >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <MyDialog
         title={dialogTitle}
         openDialog={openDialog}
@@ -142,7 +154,7 @@ const ViewTodo = ({onDeleteTodo,todos}) => {
           <ButtonWithBackdrop label="Edit" click={() => router.push(`/todo/${id}`)} className={classes.btn}/>
           </div>
         </Paper>}
-        {!data.id && <Paper className={classes.paper}>
+        {(!data.id && !loading) && <Paper className={classes.paper}>
           <div className={classes.body}>No item found</div>
           <ButtonWithBackdrop label="Go Back" click={() => router.push(`/`)} className={classes.btn}/>
         </Paper>}

@@ -94,7 +94,7 @@ export default function TransitionsModal({onClose,openDialog,positiveDialog,titl
              <Button 
              className={classes.button}
              onClick={handleClose}
-             >ok</Button>
+             >OK</Button>
              </div>
           </div>
         </Slide>
