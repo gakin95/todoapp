@@ -34,7 +34,7 @@ export default function SimpleBackdrop(props) {
       >
         {props.label}
       </Button>
-      <Backdrop className={classes.backdrop} open={props.open} >
+      <Backdrop className={classes.backdrop} open={props.open?props.open:false} >
         <CircularProgress color="inherit" />
       </Backdrop>
     </div>

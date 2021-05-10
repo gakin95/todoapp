@@ -74,7 +74,7 @@ export default function TransitionsModal({onClose,openDialog,positiveDialog,titl
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={openDialog}
+        open={openDialog?openDialog:false}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -82,7 +82,7 @@ export default function TransitionsModal({onClose,openDialog,positiveDialog,titl
           timeout: 500,
         }}
       >
-        <Slide in={openDialog}>
+        <Slide in={openDialog?openDialog:false}>
           <div className={classes.paper}>
             <div className={classes.center}>
             {positiveDialog && <CheckCircleIcon color='secondary' className={classes.bgimg}/>}
