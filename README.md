@@ -6,7 +6,7 @@ Download the example [or clone the repo](https://github.com/mui-org/material-ui)
 
 ```sh
 git clone https://github.com/gakin95/todoapp.git
-cd crudTodoList
+cd todoapp
 ```
 
 Install it and run:
