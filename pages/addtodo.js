@@ -93,7 +93,6 @@ const CreateTodo = ({onAddTodo}) => {
     setErr('');
     setOpen(true);
     const response = await addTodo(data);
-    console.log(response)
     if (response && response.data){
         setOpen(false);
           setOpenDialog(true);

@@ -59,9 +59,7 @@ const EditTodo = ({onEditTodo,todos}) => {
   const [positiveDialog, setPositiveDialog] = useState(false);
   const classes = useStyles();
   const router = useRouter();
-  console.log('router',router)
   const { id } = router.query;
-  console.log('id...', id)
   const [data, setData] = useState({
     id:'',
     title: '',
@@ -115,7 +113,6 @@ const EditTodo = ({onEditTodo,todos}) => {
     setErr('');
     setOpen(true);
     const response = await updateTodo(data,id);
-    console.log('edit',response)
     if (response && response.data){
         setOpen(false);
           setOpenDialog(true);

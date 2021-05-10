@@ -67,7 +67,6 @@ const classes = useStyles();
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  console.log("data", data);
 
   const getTodos = async () => {
     const response = await getALLTodo();
