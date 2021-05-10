@@ -67,23 +67,32 @@ const EditTodo = ({onEditTodo,todos}) => {
     userId: '',
   });
 
-  const GetATodo = async (id) => {
+  const GetATodo = async () => {
     const response = await getATodo(id);
     const items = [...todos];
-    const curItem = items.find(item => item.id === response.data.id);
-    if (response && response.data){
+    const curItem = items.find(item => item.id == id);
+    if (curItem && curItem.id){
       setData({
-        id: response.data.id,
-        body: curItem ? curItem.body :response.data.body,
-        title: curItem ? curItem.title : response.data.title,
-        userId: response.data.userId,
+        id: curItem.id,
+        body: curItem.body,
+        title: curItem.title,
+        userId: curItem.userId,
       })
+    }else{
+      if (response && response.data){
+        setData({
+          id: response.data.id,
+          body: curItem ? curItem.body :response.data.body,
+          title: curItem ? curItem.title : response.data.title,
+          userId: response.data.userId,
+        })
+      }
     }
   }
 
   useEffect(() => {
-    GetATodo(id)
-  },[id])
+    GetATodo()
+  },[])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -108,11 +117,15 @@ const EditTodo = ({onEditTodo,todos}) => {
     return true
   };
   const handleSubmit = async () => {
+    const {title, body, userId} = data;
    if (validateData()) {
     setErrorMessage('');
     setErr('');
     setOpen(true);
-    const response = await updateTodo(data,id);
+    console.log('id>100',id>100)
+  /*-------------------------this is because json place holder will throw and error if the id is not in their database, they only allow editing between 1-100 id */
+    if (id < 101){
+      const response = await updateTodo(data,id);
     if (response && response.data){
         setOpen(false);
           setOpenDialog(true);
@@ -126,20 +139,30 @@ const EditTodo = ({onEditTodo,todos}) => {
           title:response.data.title,
           userId:response.data.userId,
         })
-        // setData({
-        //   id: response.data.id,
-        //   body: response.data.body,
-        //   title:response.data.title,
-        //   userId:response.data.userId,
-        // })
       }
+    }
+    }else{
+       /*-------------------------here we want to handle internal editing. we fake an edit here-------------- */
+       setTimeout(() => {
+        setOpen(false);
+        setOpenDialog(true);
+    setDialogTitle('Success');
+    setPositiveDialog(true);
+    setDialogMessage('Sucessfully edited');
+    onEditTodo({
+      id: +id,
+      body: body,
+      title:title,
+      userId:userId,
+    })
+       },[1000])
     }
    }
   };
 
   const handleClose = () => {
     setOpenDialog(false);
-    router.push(`/post/${id}`)
+    router.push(`/`)
   }
 
   return (

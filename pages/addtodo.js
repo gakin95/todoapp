@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 //#707070
 
-const CreateTodo = ({onAddTodo}) => {
+const CreateTodo = ({onAddTodo,items}) => {
   const [open, setOpen] = useState(false);
   const [err, setErr] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -101,7 +101,7 @@ const CreateTodo = ({onAddTodo}) => {
       setDialogMessage(response.message);
       if (response.status){
         onAddTodo({
-            id: response.data.id,
+            id: items.length>0?items.length+1:response.data.id,
             title: response.data.title,
             body: response.data.body,
             userId: response.data.userId, 
@@ -168,10 +168,16 @@ const CreateTodo = ({onAddTodo}) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    items:state.todos.details,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
       onAddTodo: (item) => dispatch(actions.addTodo(item)),
     };
   };
   
-  export default connect(null, mapDispatchToProps)(CreateTodo);
+  export default connect(mapStateToProps, mapDispatchToProps)(CreateTodo);

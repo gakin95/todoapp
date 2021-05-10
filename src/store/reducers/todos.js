@@ -25,6 +25,7 @@ const updateTodo = (state, action) => {
     const curItem = tempData.find(item => item.id === action.item.id);
     const index = tempData.indexOf(curItem);
     const todo = tempData[index];
+    console.log('todo...',todo)
     todo.title = action.item.title;
     todo.body = action.item.body;
     return updatedObject(state, {
