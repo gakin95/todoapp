@@ -144,7 +144,7 @@ const CreateTodo = ({onAddTodo}) => {
             placeholder="Enter title"
             error={err === 'title'}
             helperText={err === 'title' && errorMessage}
-            value={data.title}
+            value={data.title || ''}
             onChange={handleChange}
           />
           <TextField
@@ -158,7 +158,7 @@ const CreateTodo = ({onAddTodo}) => {
             error={err === 'body'}
             helperText={err === 'body' && errorMessage}
             autoFocus
-            value={data.body}
+            value={data.body || ''}
             onChange={handleChange}
           />
           <ButtonWithBackdrop label="Create" click={handleSubmit} open={open}/>

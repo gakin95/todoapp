@@ -135,11 +135,15 @@ const EditTodo = ({onEditTodo,todos}) => {
         //   title:response.data.title,
         //   userId:response.data.userId,
         // })
-        router.push(`/post/${response.data.id}`)
       }
     }
    }
   };
+
+  const handleClose = () => {
+    setOpenDialog(false);
+    router.push(`/post/${id}`)
+  }
 
   return (
     <div>
@@ -149,7 +153,7 @@ const EditTodo = ({onEditTodo,todos}) => {
         title={dialogTitle}
         openDialog={openDialog}
         positiveDialog={positiveDialog}
-        onClose={() => setOpenDialog(false)}
+        onClose={handleClose}
       >
         {dialogMessage}
       </MyDialog>
@@ -168,7 +172,7 @@ const EditTodo = ({onEditTodo,todos}) => {
             placeholder="Enter title"
             error={err === 'title'}
             helperText={err === 'title' && errorMessage}
-            value={data.title}
+            value={data.title || ''}
             onChange={handleChange}
           />
           <TextField
@@ -182,7 +186,7 @@ const EditTodo = ({onEditTodo,todos}) => {
             error={err === 'body'}
             helperText={err === 'body' && errorMessage}
             autoFocus
-            value={data.body}
+            value={data.body || ''}
             onChange={handleChange}
           />
           <ButtonWithBackdrop label="Update" click={handleSubmit} open={open}/>
