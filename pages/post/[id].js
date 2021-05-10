@@ -116,6 +116,11 @@ const ViewTodo = ({onDeleteTodo,todos}) => {
      }
    };
 
+   const handleClose = () => {
+    setOpenDialog(false);
+     router.push(`/`)
+   }
+
   return (
     <div>
        <Header />
@@ -124,7 +129,7 @@ const ViewTodo = ({onDeleteTodo,todos}) => {
         title={dialogTitle}
         openDialog={openDialog}
         positiveDialog={positiveDialog}
-        onClose={() => setOpenDialog(false)}
+        onClose={handleClose}
       >
         {dialogMessage}
       </MyDialog>
