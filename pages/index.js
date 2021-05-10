@@ -95,7 +95,7 @@ const classes = useStyles();
         </div>
         <Grid container spacing={2} className={classes.mt}>
           {currentPosts.map((item) => (
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3} key={item.id}>
               <Todo title={item.title} body={item.body} onClick={() => router.push(`/post/${item.id}`)}/>
             </Grid>
           ))}
