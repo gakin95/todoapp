@@ -70,6 +70,7 @@ const classes = useStyles();
 
   const getTodos = async () => {
     const response = await getALLTodo();
+    console.log('length..',response.data.length)
     if (response && response.data) {
       if (response.data.length > data.length && !deleted){
         onGetTodos(response.data)
